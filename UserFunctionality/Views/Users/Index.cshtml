@@ -1,0 +1,97 @@
+﻿@model IEnumerable<UserFunctionality.Models.Users>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<!-- Search Form -->
+<form>
+
+<div class="col-4 p-0 justify-content-end">
+    <form asp-controller="Users" asp-action="Index">
+        <span class="btn-group">
+            <input class="form-control" type="text" name="SearchText" placeholder="Search Key">
+            <input class="p-2 ml-3 btn btn-sm btn-info" type="submit" value="Search" />
+        </span>
+    </form>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmailId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+        </tr>
+}
+    </tbody>
+</table> 
+
+<!-- Pagination Controls -->
+@* <div id="paginationControls">
+    @if (Model.HasPreviousPage)
+    {
+        <a href="javascript:void(0);" onclick="searchUsers(@Model.PageIndex - 1)">Previous</a>
+    }
+    @if (Model.HasNextPage)
+    {
+        <a href="javascript:void(0);" onclick="searchUsers(@Model.PageIndex + 1)">Next</a>
+    }
+</div> *@
+
+@* @section Scripts {
+    <script src="~/path/to/jquery.js"></script> <!-- Ensure jQuery is included -->
+    <script>
+    function searchUsers(pageNumber = 1) {
+        var searchTerm = $('#searchTerm').val();
+        $.ajax({
+            url: '@Url.Action("Search", "User")',
+            data: { searchTerm: searchTerm, pageNumber: pageNumber },
+            success: function(data) {
+                $('#searchResults').html(data);
+            }
+        });
+    }
+
+    $(function() {
+        $('#searchTerm').on('keyup', function() {
+            searchUsers();
+        });
+    });
+    </script> *@
+</form>

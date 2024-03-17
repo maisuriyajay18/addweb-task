@@ -1,0 +1,20 @@
+CREATE DATABASE UsersDb;
+
+CREATE TABLE Users (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    FirstName NVARCHAR(50),
+    LastName NVARCHAR(50),
+    EmailId NVARCHAR(100),
+    Address NVARCHAR(255),
+    DateOfBirth DATE
+);
+
+
+INSERT INTO Users (FirstName, LastName, EmailId, Address, DateOfBirth)
+VALUES
+('Jay', 'Maisuriya', 'jay123@gmail.com', '123 ram Street', '2000-04-02'),
+('parth','maisuriya','parth123@gmail.com','234 ram street', '2003-06-05'),
+('jaya', 'row', 'jaya123@gmail.com', '456 ram Street', '1999-02-02');
+
+
+select * from Users;

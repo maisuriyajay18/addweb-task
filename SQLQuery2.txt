@@ -1,0 +1,20 @@
+CREATE PROCEDURE SearchUsers
+    @SearchTerm NVARCHAR(255),
+    @PageNumber INT = 1,
+    @PageSize INT = 10
+AS
+BEGIN
+    -- Calculate the row numbers to return
+    WITH UserCTE AS (
+        SELECT *,
+               ROW_NUMBER() OVER (ORDER BY FirstName ASC) AS RowNum
+        FROM Users
+        WHERE FirstName LIKE '%' + @SearchTerm + '%'
+           OR LastName LIKE '%' + @SearchTerm + '%'
+           OR EmailId LIKE '%' + @SearchTerm + '%'
+           OR Address LIKE '%' + @SearchTerm + '%'
+    )
+    SELECT Id, FirstName, LastName, EmailId, Address, DateOfBirth
+    FROM UserCTE
+    WHERE RowNum BETWEEN ((@PageNumber - 1) * @PageSize + 1) AND (@PageNumber * @PageSize)
+END
